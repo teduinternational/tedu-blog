@@ -14,7 +14,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "nswag-admin": "node node_modules/nswag/bin/nswag.js run nswag-admin.json"
   },
   "private": true,
   "dependencies": {
@@ -38,6 +39,7 @@
     "chart.js": "^3.9.1",
     "lodash-es": "^4.17.21",
     "ngx-scrollbar": "^13.0.3",
+    "nswag": "^13.20.0",
     "rxjs": "~7.8.1",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.1"

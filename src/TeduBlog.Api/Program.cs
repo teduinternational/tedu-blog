@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Reflection;
 using TeduBlog.Api;
+using TeduBlog.Api.Filters;
 using TeduBlog.Api.Services;
 using TeduBlog.Core.ConfigOptions;
 using TeduBlog.Core.Domain.Identity;

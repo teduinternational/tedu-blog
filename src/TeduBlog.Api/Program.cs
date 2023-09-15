@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Reflection;
 using TeduBlog.Api;
+using TeduBlog.Api.Services;
+using TeduBlog.Core.ConfigOptions;
 using TeduBlog.Core.Domain.Identity;
 using TeduBlog.Core.Models.Content;
 using TeduBlog.Core.Repositories;
@@ -61,7 +63,15 @@ foreach (var service in services)
     }
 }
 
+//Auto mapper
 builder.Services.AddAutoMapper(typeof(PostInListDto));
+
+//Authen and author
+builder.Services.Configure<JwtTokenSettings>(configuration.GetSection("JwtTokenSettings"));
+builder.Services.AddScoped<SignInManager<AppUser>, SignInManager<AppUser>>();
+builder.Services.AddScoped<UserManager<AppUser>, UserManager<AppUser>>();
+builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<RoleManager<AppRole>, RoleManager<AppRole>>();
 
 //Default config for ASP.NET Core
 builder.Services.AddControllers();

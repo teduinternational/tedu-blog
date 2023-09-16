@@ -5,14 +5,19 @@
         <c-card-group>
           <c-card class="p-4">
             <c-card-body>
-              <form cForm>
+              <form cForm [formGroup]="loginForm" (ngSubmit)="login()">
                 <h1>Login</h1>
                 <p class="text-medium-emphasis">Sign In to your account</p>
                 <c-input-group class="mb-3">
                   <span cInputGroupText>
                     <svg cIcon name="cilUser"></svg>
                   </span>
-                  <input autoComplete="username" cFormControl placeholder="Username" />
+                  <input
+                    autoComplete="username"
+                    cFormControl
+                    formControlName="userName"
+                    placeholder="Username"
+                  />
                 </c-input-group>
                 <c-input-group class="mb-4">
                   <span cInputGroupText>
@@ -21,13 +26,14 @@
                   <input
                     autoComplete="current-password"
                     cFormControl
+                    formControlName="password"
                     placeholder="Password"
                     type="password"
                   />
                 </c-input-group>
                 <c-row>
                   <c-col xs="6">
-                    <button cButton class="px-4" color="primary">
+                    <button cButton class="px-4" color="primary" type="submit">
                       Login
                     </button>
                   </c-col>
@@ -40,15 +46,24 @@
               </form>
             </c-card-body>
           </c-card>
-          <c-card [ngStyle]="{'width.%': 44}" class="text-white bg-primary py-5">
+          <c-card
+            [ngStyle]="{ 'width.%': 44 }"
+            class="text-white bg-primary py-5"
+          >
             <c-card-body class="text-center">
               <div>
                 <h2>Sign up</h2>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                  tempor incididunt ut labore et dolore magna aliqua.
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 </p>
-                <button [active]="true" cButton class="mt-3" color="primary" routerLink="/register">
+                <button
+                  [active]="true"
+                  cButton
+                  class="mt-3"
+                  color="primary"
+                  routerLink="/register"
+                >
                   Register Now!
                 </button>
               </div>

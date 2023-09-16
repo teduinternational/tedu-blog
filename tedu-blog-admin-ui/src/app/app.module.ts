@@ -45,9 +45,12 @@ import {
 } from '@coreui/angular';
 
 import { IconModule, IconSetService } from '@coreui/icons-angular';
-import { ADMIN_API_BASE_URL } from './api/admin-api.service.generated';
+import { ADMIN_API_BASE_URL, AdminApiAuthApiClient } from './api/admin-api.service.generated';
 import { environment } from './../environments/environment';
-
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { AlertService } from './shared/services/alert.service';
+import { HttpClientModule } from '@angular/common/http';
 const APP_CONTAINERS = [
   DefaultFooterComponent,
   DefaultHeaderComponent,
@@ -83,6 +86,8 @@ const APP_CONTAINERS = [
     ListGroupModule,
     CardModule,
     NgScrollbarModule,
+    ToastModule,
+    HttpClientModule
   ],
   providers: [
     { provide: ADMIN_API_BASE_URL, useValue: environment.API_URL },
@@ -92,6 +97,10 @@ const APP_CONTAINERS = [
     },
     IconSetService,
     Title,
+    MessageService,
+    AlertService,
+    AdminApiAuthApiClient
+    
   ],
   bootstrap: [AppComponent],
 })

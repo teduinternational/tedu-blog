@@ -6,8 +6,8 @@
           <c-card class="p-4">
             <c-card-body>
               <form cForm [formGroup]="loginForm" (ngSubmit)="login()">
-                <h1>Login</h1>
-                <p class="text-medium-emphasis">Sign In to your account</p>
+                <h1>Đăng nhập</h1>
+                <p class="text-medium-emphasis">Vào trang quản trị</p>
                 <c-input-group class="mb-3">
                   <span cInputGroupText>
                     <svg cIcon name="cilUser"></svg>
@@ -33,13 +33,18 @@
                 </c-input-group>
                 <c-row>
                   <c-col xs="6">
-                    <button cButton class="px-4" color="primary" type="submit">
-                      Login
-                    </button>
-                  </c-col>
-                  <c-col class="text-right" xs="6">
-                    <button cButton class="px-0" color="link">
-                      Forgot password?
+                    <button
+                      cButton
+                      [disabled]="loading"
+                      class="px-4"
+                      color="primary"
+                      type="submit"
+                    >
+                      Đăng nhập
+                      <img
+                        *ngIf="loading"
+                        src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+                      />
                     </button>
                   </c-col>
                 </c-row>
@@ -51,22 +56,7 @@
             class="text-white bg-primary py-5"
           >
             <c-card-body class="text-center">
-              <div>
-                <h2>Sign up</h2>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </p>
-                <button
-                  [active]="true"
-                  cButton
-                  class="mt-3"
-                  color="primary"
-                  routerLink="/register"
-                >
-                  Register Now!
-                </button>
-              </div>
+              
             </c-card-body>
           </c-card>
         </c-card-group>

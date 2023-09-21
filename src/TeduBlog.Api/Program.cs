@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -6,6 +7,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Reflection;
 using System.Text;
 using TeduBlog.Api;
+using TeduBlog.Api.Authorization;
 using TeduBlog.Api.Filters;
 using TeduBlog.Api.Services;
 using TeduBlog.Core.ConfigOptions;
@@ -21,6 +23,8 @@ var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 var connectionString = configuration.GetConnectionString("DefaultConnection");
 var TeduCorsPolicy = "TeduCorsPolicy";
+builder.Services.AddSingleton<IAuthorizationPolicyProvider, PermissionPolicyProvider>();
+builder.Services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
 
 builder.Services.AddCors(o => o.AddPolicy(TeduCorsPolicy, builder =>
 {

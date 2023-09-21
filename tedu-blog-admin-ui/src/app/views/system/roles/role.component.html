@@ -1,0 +1,63 @@
+<p-panel #pnl [style]="{ 'margin-bottom': '10px' }">
+  <p-header> Quản lý quyền </p-header>
+  <div class="row">
+    <div class="col">
+      <button appPermission appPolicy="Permissons.Roles.Create" pButton type="button" label="Thêm" icon="fa fa-plus"
+        (click)="showAddModal()" class="p-button-sm p-button-success ms-1"></button>
+      <button appPermission appPolicy="Permissons.Roles.Delete" pButton type="button" label="Xóa" icon="fa fa-trash"
+        *ngIf="selectedItems.length > 0" (click)="deleteItems()" class="p-button-sm p-button-danger ms-1"></button>
+      <button appPermission appPolicy="Permissons.Roles.Edit" pButton type="button" label="Sửa" icon="fa fa-edit"
+        *ngIf="selectedItems.length == 1" (click)="showEditModal()"
+        class="p-button-sm p-button-warning ms-1"></button>
+    </div>
+    <div class="col">
+      <div class="row">
+        <div class="col">
+          <input id="txtKeyword" pInputText (keyup.enter)="loadData()" [(ngModel)]="keyword"
+            placeholder="Nhập tên..." type="text" />
+        </div>
+        <div class="col">
+          <button type="button" pButton (click)="loadData()">Tìm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <p-table #dt [value]="items" selectionMode="multiple" dataKey="id" [(selection)]="selectedItems"
+      [metaKeySelection]="true">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 10px">
+            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+          </th>
+          <th>Tên</th>
+          <th>Mô tả</th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-row>
+        <tr [pSelectableRow]="row">
+          <td style="width: 10px">
+            <span class="ui-column-title"></span>
+            <p-tableCheckbox [value]="row"></p-tableCheckbox>
+          </td>
+          <td>{{ row.name }}</td>
+          <td>{{ row.displayName }}</td>
+          <td>
+            <button pButton class="p-button-sm" (click)="showPermissionModal(row.id, row.name)">Phân quyền</button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="summary">
+        <div style="text-align: left">Tổng số: {{ totalCount | number }}</div>
+      </ng-template>
+    </p-table>
+  </div>
+  <p-paginator [rows]="pageSize" [totalRecords]="totalCount" (onPageChange)="pageChanged($event)"
+    [rowsPerPageOptions]="[10, 20, 50, 100]"></p-paginator>
+
+  <p-blockUI [target]="pnl" [blocked]="blockedPanel">
+    <p-progressSpinner [style]="{ width: '100px', height: '100px', position: 'absolute', top: '25%', left: '50%' }"
+      strokeWidth="2" animationDuration=".5s"></p-progressSpinner>
+  </p-blockUI>
+</p-panel>

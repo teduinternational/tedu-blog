@@ -1,0 +1,88 @@
+<form class="form-horizontal form-label-left" skipValidation [formGroup]="form" (ngSubmit)="saveChange()">
+    <p-panel #pnlDetail header="Thông tin" [toggleable]="true" [collapsed]="false">
+        <div class="formgrid grid">
+            <div class="field col-12 md:col-6">
+                <label for="userName">Tài khoản <span class="required">*</span></label>
+                <input id="userName" type="text" pInputText [pKeyFilter]="noSpecial" formControlName="userName"
+                    [style]="{ width: '100%' }" />
+                <app-validation-message [entityForm]="form" fieldName="userName"
+                    [validationMessages]="validationMessages">
+                </app-validation-message>
+            </div>
+            <div class="field col-12 md:col-6">
+                <label for="password">Mật khẩu <span class="required">*</span></label>
+                <input id="password" type="password" pInputText [pKeyFilter]="noSpecial" formControlName="password"
+                    [style]="{ width: '100%' }" />
+                <app-validation-message [entityForm]="form" fieldName="password"
+                    [validationMessages]="validationMessages">
+                </app-validation-message>
+            </div>
+            <div class="field col-12 md:col-6">
+                <label for="lastName" class="block">Họ <span class="required">*</span></label>
+                <input id="lastName" type="text" pInputText [pKeyFilter]="noSpecial" formControlName="lastName"
+                    [style]="{ width: '100%' }" />
+                <app-validation-message [entityForm]="form" fieldName="lastName"
+                    [validationMessages]="validationMessages">
+                </app-validation-message>
+            </div>
+            <div class="field col-12 md:col-6">
+                <label for="firstName" class="block">Tên <span class="required">*</span></label>
+                <input id="firstName" type="text" pInputText [pKeyFilter]="noSpecial" formControlName="firstName"
+                    [style]="{ width: '100%' }" />
+                <app-validation-message [entityForm]="form" fieldName="firstName"
+                    [validationMessages]="validationMessages">
+                </app-validation-message>
+            </div>
+            <div class="field col-12 md:col-6">
+                <label for="phoneNumber">Số điện thoại<span class="required">*</span></label>
+                <input id="phoneNumber" type="text" pInputText [pKeyFilter]="noSpecial" formControlName="phoneNumber"
+                    [style]="{ width: '100%' }" />
+                <app-validation-message [entityForm]="form" fieldName="phoneNumber"
+                    [validationMessages]="validationMessages">
+                </app-validation-message>
+            </div>
+            <div class="field col-12 md:col-6">
+                <label for="email">Email <span class="required">*</span></label>
+                <input id="email" type="text" pInputText [pKeyFilter]="noSpecial" formControlName="email"
+                    [style]="{ width: '100%' }" />
+                <app-validation-message [entityForm]="form" fieldName="email" [validationMessages]="validationMessages">
+                </app-validation-message>
+            </div>
+
+            <div class="field col-12 md:col-4">
+                <label for="dob">Ngày sinh</label>
+                <input id="dob" type="date" pInputText [pKeyFilter]="noSpecial" formControlName="dob"
+                    [style]="{ width: '100%' }" />
+            </div>
+
+            <div class="field col-6 md:col-6">
+                <label for="avatarFile">Ảnh đại diện</label>
+                <input id="avatarFile" (change)="onFileChange($event)" type="file" [style]="{ width: '100%' }" />
+                <p-image *ngIf="avatarImage" [src]="avatarImage" [preview]="true" width="250">
+                </p-image>
+            </div>
+            <div class="field col-6 md:col-6">
+
+            </div>
+            <div class="field-checkbox col-12 md:col-3">
+                <p-checkbox formControlName="isActive" [binary]="true" id="isActive"></p-checkbox>
+                <label for="isActive">Kích hoạt</label>
+            </div>
+        </div>
+        <ng-template pTemplate="footer">
+            <button type="submit" pButton [disabled]="!form.valid || btnDisabled">
+                Lưu lại
+            </button>
+        </ng-template>
+
+        <p-blockUI [target]="pnlDetail" [blocked]="blockedPanelDetail">
+            <p-progressSpinner [style]="{
+                    width: '100px',
+                    height: '100px',
+                    position: 'absolute',
+                    top: '25%',
+                    left: '50%'
+                }" strokeWidth="2" animationDuration=".5s"></p-progressSpinner>
+        </p-blockUI>
+    </p-panel>
+</form>

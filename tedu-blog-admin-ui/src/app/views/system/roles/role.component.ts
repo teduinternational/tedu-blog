@@ -8,7 +8,7 @@ import {
 import { DialogService, DynamicDialogComponent } from 'primeng/dynamicdialog';
 import { AlertService } from 'src/app/shared/services/alert.service';
 import { ConfirmationService } from 'primeng/api';
-import { RolesDetailComponent } from './roles-detail.component';
+import { RoleDetailComponent } from './role-detail.component';
 import { MessageConstants } from '../../../shared/constants/messages.constant';
 import { PermissionGrantComponent } from './permission-grant.component';
 
@@ -108,7 +108,7 @@ export class RoleComponent implements OnInit, OnDestroy {
       return;
     }
     var id = this.selectedItems[0].id;
-    const ref = this.dialogService.open(RolesDetailComponent, {
+    const ref = this.dialogService.open(RoleDetailComponent, {
       data: {
         id: id,
       },
@@ -128,7 +128,7 @@ export class RoleComponent implements OnInit, OnDestroy {
     });
   }
   showAddModal() {
-    const ref = this.dialogService.open(RolesDetailComponent, {
+    const ref = this.dialogService.open(RoleDetailComponent, {
       header: 'Thêm mới quyền',
       width: '70%',
     });

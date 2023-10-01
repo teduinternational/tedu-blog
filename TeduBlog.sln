@@ -3,13 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34009.444
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeduBlog.Api", "src\TeduBlog.Api\TeduBlog.Api.csproj", "{C11D94C7-CFEB-4A09-ACA8-8BB4AE4D577D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeduBlog.Api", "src\TeduBlog.Api\TeduBlog.Api.csproj", "{C11D94C7-CFEB-4A09-ACA8-8BB4AE4D577D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeduBlog.Core", "src\TeduBlog.Core\TeduBlog.Core.csproj", "{D4EA5AF1-55CE-4608-92C7-E24322EA452E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeduBlog.Core", "src\TeduBlog.Core\TeduBlog.Core.csproj", "{D4EA5AF1-55CE-4608-92C7-E24322EA452E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeduBlog.Data", "src\TeduBlog.Data\TeduBlog.Data.csproj", "{B1223873-52EF-44B9-9B5A-D69986C6DB4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeduBlog.Data", "src\TeduBlog.Data\TeduBlog.Data.csproj", "{B1223873-52EF-44B9-9B5A-D69986C6DB4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeduBlog.WebApp", "src\TeduBlog.WebApp\TeduBlog.WebApp.csproj", "{2284F502-9B47-4819-807A-B250BA880ED1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeduBlog.WebApp", "src\TeduBlog.WebApp\TeduBlog.WebApp.csproj", "{2284F502-9B47-4819-807A-B250BA880ED1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BFB11DF3-03F2-47FE-9AC8-540FEC9DD259}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

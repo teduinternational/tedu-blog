@@ -48,6 +48,7 @@ import { IconModule, IconSetService } from '@coreui/icons-angular';
 import {
   ADMIN_API_BASE_URL,
   AdminApiAuthApiClient,
+  AdminApiPostCategoryApiClient,
   AdminApiRoleApiClient,
   AdminApiTestApiClient,
   AdminApiTokenApiClient,
@@ -133,6 +134,7 @@ const APP_CONTAINERS = [
     AdminApiTokenApiClient,
     AdminApiRoleApiClient,
     AdminApiUserApiClient,
+    AdminApiPostCategoryApiClient,
     DialogService,
     UtilityService,
     ConfirmationService 

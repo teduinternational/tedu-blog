@@ -1,0 +1,56 @@
+<form class="form-horizontal form-label-left" skipValidation [formGroup]="form" (ngSubmit)="saveChange()">
+  <p-panel #pnlDetail header="Thông tin" [toggleable]="true" [collapsed]="false">
+    <div class="row">
+        <div class="field col-4 md:col-4">
+          <p-dropdown id="seriesId" [options]="allSeries" formControlName="seriesId" [showClear]="true"
+            placeholder="Chọn loạt bài" autoWidth="false" [style]="{ width: '100%' }">
+          </p-dropdown>
+        </div>
+        <div class="field col-6 md:col-6">
+          <label for="sortOrder">Thứ tự <span class="required">*</span></label>
+          <p-inputNumber id="sortOrder" formControlName="sortOrder" [style]="{ width: '100%' }">
+          </p-inputNumber>
+        </div>
+        <div class="field col-2 md:col-2">
+          <button type="submit" class="btn btn-primary" [disabled]="!form.valid || btnDisabled">
+            Lưu lại
+          </button>
+        </div>
+    </div>
+    <div class="row mt-3">
+      <p-table #dt [value]="postSeries" selectionMode="multiple" dataKey="id" [metaKeySelection]="true"
+        [responsive]="true">
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width: 10px">
+              <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th>Tiêu đề</th>
+            <th></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-row>
+          <tr [pSelectableRow]="row">
+            <td style="width: 10px">
+              <span class="ui-column-title"></span>
+              <p-tableCheckbox [value]="row"></p-tableCheckbox>
+            </td>
+            <td>{{ row.name }}</td>
+            <td>
+              <button pButton pRipple type="button" icon="pi pi-trash" pTooltip="Xóa" tooltipPosition="top"
+                (click)="removeSeries(row.id)" class="p-button-rounded p-button-text p-button-danger"></button>
+
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+        </ng-template>
+      </p-table>
+    </div>
+
+    <p-blockUI [target]="pnlDetail" [blocked]="blockedPanelDetail">
+      <p-progressSpinner [style]="{ width: '100px', height: '100px', position: 'absolute', top: '25%', left: '50%' }"
+        strokeWidth="2" animationDuration=".5s"></p-progressSpinner>
+    </p-blockUI>
+  </p-panel>
+</form>

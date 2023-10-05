@@ -20,7 +20,6 @@ namespace TeduBlog.Core.Models.Content
         public DateTime? DateModified { get; set; }
         public bool IsPaid { get; set; }
         public double RoyaltyAmount { get; set; }
-        public PostStatus Status { get; set; }
 
         public class AutoMapperProfiles : Profile
         {

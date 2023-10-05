@@ -1,0 +1,26 @@
+<form class="form-horizontal form-label-left" skipValidation [formGroup]="form" (ngSubmit)="saveChange()">
+    <p-panel #pnlDetail header="Lý do trả lại bài" [toggleable]="true" [collapsed]="false">
+        <div class="formgrid grid">
+
+            <div class="field col-12">
+                <label for="reason" class="block">Mô tả ngắn <span class="required">*</span></label>
+                <textarea id="reason" type="text" rows="4" pInputTextarea formControlName="reason"
+                    [style]="{ width: '100%' }"></textarea>
+                <app-validation-message [entityForm]="form" fieldName="reason"
+                    [validationMessages]="validationMessages"></app-validation-message>
+            </div>
+
+        </div>
+        <ng-template pTemplate="footer">
+            <button type="submit" class="btn btn-primary" [disabled]="!form.valid || btnDisabled">
+                Gửi lại
+            </button>
+        </ng-template>
+
+        <p-blockUI [target]="pnlDetail" [blocked]="blockedPanelDetail">
+            <p-progressSpinner
+                [style]="{ width: '100px', height: '100px', position: 'absolute', top: '25%', left: '50%' }"
+                strokeWidth="2" animationDuration=".5s"></p-progressSpinner>
+        </p-blockUI>
+    </p-panel>
+</form>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static TeduBlog.Core.SeedWorks.Constants.Permissions;
 
 namespace TeduBlog.Core.Domain.Identity
 {
@@ -26,5 +27,10 @@ namespace TeduBlog.Core.Domain.Identity
         public DateTime? VipExpireDate { get; set; }
         public DateTime? LastLoginDate { get; set; }
         public double Balance { get; set; }
+
+        public string GetFullName()
+        {
+            return this.FirstName + " " + this.LastName;
+        }
     }
 }

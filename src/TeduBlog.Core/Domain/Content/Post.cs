@@ -47,15 +47,26 @@ namespace TeduBlog.Core.Domain.Content
         public bool IsPaid { get; set; }
         public double RoyaltyAmount { get; set; }
         public PostStatus Status { get; set; }
+
+        [Required]
+        [Column(TypeName = "varchar(250)")]
+        public required string CategorySlug { set; get; }
+
+        [MaxLength(250)]
+        [Required]
+        public required string CategoryName { set; get; }
+        [MaxLength(250)]
+        public string AuthorUserName { set; get; }
+        [MaxLength(250)]
+        public string AuthorName { set; get; }
+
     }
 
     public enum PostStatus
     {
-        Draft = 1,
-        Canceled = 2,
-        WaitingForApproval = 3,
-        Rejected = 4,
-        WaitingForPublish = 5,
-        Published = 6
+        Draft = 0,
+        WaitingForApproval = 1,
+        Rejected = 2,
+        Published = 3
     }
 }

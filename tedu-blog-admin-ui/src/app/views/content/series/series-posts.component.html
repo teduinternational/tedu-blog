@@ -1,0 +1,38 @@
+<p-panel #pnlDetail header="Thông tin" [toggleable]="true" [collapsed]="false">
+  <div class="row">
+    <p-table #dt [value]="posts" selectionMode="multiple" dataKey="id" [metaKeySelection]="true" [responsive]="true">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 10px">
+            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+          </th>
+          <th>Tiêu đề</th>
+          <th>Thứ tự</th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-row>
+        <tr [pSelectableRow]="row">
+          <td style="width: 10px">
+            <span class="ui-column-title"></span>
+            <p-tableCheckbox [value]="row"></p-tableCheckbox>
+          </td>
+          <td>{{ row.name }}</td>
+          <td>{{ row.sortOrder }}</td>
+          <td>
+            <button pButton pRipple type="button" icon="pi pi-trash" pTooltip="Xóa" tooltipPosition="top"
+              (click)="removePost(row.id)" class="p-button-rounded p-button-text p-button-danger"></button>
+
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="summary">
+      </ng-template>
+    </p-table>
+  </div>
+
+  <p-blockUI [target]="pnlDetail" [blocked]="blockedPanel">
+    <p-progressSpinner [style]="{ width: '100px', height: '100px', position: 'absolute', top: '25%', left: '50%' }"
+      strokeWidth="2" animationDuration=".5s"></p-progressSpinner>
+  </p-blockUI>
+</p-panel>

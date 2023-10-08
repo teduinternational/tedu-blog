@@ -36,6 +36,7 @@
             <th>Email</th>
             <th>Số ĐT</th>
             <th>Ngày tham gia</th>
+            <th>Số dư</th>
             <th style="width: 150px">Trạng thái</th>
             <th></th>
           </tr>
@@ -51,6 +52,7 @@
             <td>{{ row.email }}</td>
             <td>{{ row.phoneNumber }}</td>
             <td>{{ row.dateCreated | date: 'dd-MM-yyyy hh:mm' }}</td>
+            <td>{{ row.balance | number}}</td>
             <td style="width: 150px">
               <p-badge *ngIf="row.isActive == 1" value="Kích hoạt" severity="success"></p-badge>
               <p-badge *ngIf="row.isActive == 0" value="Khoá" severity="danger"></p-badge>

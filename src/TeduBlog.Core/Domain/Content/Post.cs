@@ -60,6 +60,7 @@ namespace TeduBlog.Core.Domain.Content
         [MaxLength(250)]
         public string AuthorName { set; get; }
 
+        public DateTime? PaidDate { get; set; }
     }
 
     public enum PostStatus

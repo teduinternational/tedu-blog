@@ -40,6 +40,7 @@
             <th>Danh mục</th>
             <th>Lượt xem</th>
             <th>Ngày tạo</th>
+            <th>Nhuận bút</th>
             <th style="width: 150px">Xuất bản</th>
             <th></th>
           </tr>
@@ -54,6 +55,10 @@
             <td>{{ row.categoryName }}</td>
             <td>{{ row.viewCount | number }}</td>
             <td>{{ row.dateCreated | date : 'dd-MM-yyyy hh:mm' }}</td>
+            <td>
+              <p-badge *ngIf="row.isPaid == 0" value="Chưa TT" severity="danger"></p-badge>
+              <p-badge *ngIf="row.isPaid == 1" value="Đã TT" severity="success"></p-badge>
+            </td>
             <td style="width: 150px">
               <p-badge *ngIf="row.status == 0" value="Nháp" severity="info"></p-badge>
               <p-badge *ngIf="row.status == 1" value="Đợi duyệt" severity="warning"></p-badge>

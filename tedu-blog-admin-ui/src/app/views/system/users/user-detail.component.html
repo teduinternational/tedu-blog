@@ -69,6 +69,9 @@
                 <p-inputNumber id="royaltyAmountPerPost" formControlName="royaltyAmountPerPost"
                     [style]="{ width: '100%' }">
                 </p-inputNumber>
+                <app-validation-message [entityForm]="form" fieldName="royaltyAmountPerPost"
+                    [validationMessages]="validationMessages">
+                </app-validation-message>
             </div>
             <div class="field-checkbox col-12 md:col-3">
                 <p-checkbox formControlName="isActive" [binary]="true" id="isActive"></p-checkbox>

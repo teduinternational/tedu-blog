@@ -55,12 +55,12 @@ builder.Services.Configure<IdentityOptions>(options =>
     // Lockout settings.
     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
     options.Lockout.MaxFailedAccessAttempts = 5;
-    options.Lockout.AllowedForNewUsers = true;
+    options.Lockout.AllowedForNewUsers = false;
 
     // User settings.
     options.User.AllowedUserNameCharacters =
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-    options.User.RequireUniqueEmail = false;
+    options.User.RequireUniqueEmail = true;
 });
 
 // Add services to the container.

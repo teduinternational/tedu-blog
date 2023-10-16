@@ -37,5 +37,10 @@ namespace TeduBlog.Data.Repositories
                 PageSize = pageSize
             };
         }
+
+        public async Task<bool> HasPost(Guid categoryId)
+        {
+            return await _context.Posts.AnyAsync(x => x.CategoryId == categoryId);
+        }
     }
 }

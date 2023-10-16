@@ -19,6 +19,8 @@ namespace TeduBlog.Core.Models.System
         public DateTime? Dob { get; set; }
         public string? Avatar { get; set; }
         public bool IsActive { get; set; }
+        public double RoyaltyAmountPerPost { get; set; }
+
         public class AutoMapperProfiles : Profile
         {
             public AutoMapperProfiles()

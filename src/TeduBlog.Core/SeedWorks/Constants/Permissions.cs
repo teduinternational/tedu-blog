@@ -52,6 +52,8 @@ namespace TeduBlog.Core.SeedWorks.Constants
             public const string Edit = "Permissions.Posts.Edit";
             [Description("Xóa bài viết")]
             public const string Delete = "Permissions.Posts.Delete";
+            [Description("Duyệt bài viết")]
+            public const string Approve = "Permissions.Posts.Approve";
         }
 
         public static class Series
@@ -64,6 +66,14 @@ namespace TeduBlog.Core.SeedWorks.Constants
             public const string Edit = "Permissions.Series.Edit";
             [Description("Xóa loạt bài")]
             public const string Delete = "Permissions.Series.Delete";
+        }
+
+        public static class Royalty
+        {
+            [Description("Xem nhuận bút")]
+            public const string View = "Permissions.Royalty.View";
+            [Description("Trả nhuận bút")]
+            public const string Pay = "Permissions.Royalty.Pay";
         }
     }
 }

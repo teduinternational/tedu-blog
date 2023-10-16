@@ -15,9 +15,11 @@ using TeduBlog.Core.Domain.Identity;
 using TeduBlog.Core.Models.Content;
 using TeduBlog.Core.Repositories;
 using TeduBlog.Core.SeedWorks;
+using TeduBlog.Core.Services;
 using TeduBlog.Data;
 using TeduBlog.Data.Repositories;
 using TeduBlog.Data.SeedWorks;
+using TeduBlog.Data.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -85,10 +87,13 @@ builder.Services.AddAutoMapper(typeof(PostInListDto));
 
 //Authen and author
 builder.Services.Configure<JwtTokenSettings>(configuration.GetSection("JwtTokenSettings"));
+builder.Services.Configure<MediaSettings>(configuration.GetSection("MediaSettings"));
+
 builder.Services.AddScoped<SignInManager<AppUser>, SignInManager<AppUser>>();
 builder.Services.AddScoped<UserManager<AppUser>, UserManager<AppUser>>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<RoleManager<AppRole>, RoleManager<AppRole>>();
+builder.Services.AddScoped<IRoyaltyService, RoyaltyService>();
 
 //Default config for ASP.NET Core
 builder.Services.AddControllers();
@@ -139,6 +144,8 @@ if (app.Environment.IsDevelopment())
         c.DisplayRequestDuration();
     });
 }
+app.UseStaticFiles();
+
 app.UseCors(TeduCorsPolicy);
 app.UseHttpsRedirection();
 app.UseAuthentication();

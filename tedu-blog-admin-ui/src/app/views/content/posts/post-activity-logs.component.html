@@ -1,0 +1,48 @@
+<p-panel #pnlDetail header="Thông tin" [toggleable]="true" [collapsed]="false">
+  <div class="row mt-3">
+    <p-table #dt [value]="items" selectionMode="multiple" dataKey="id" [metaKeySelection]="true" [responsive]="true">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 10px">
+            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+          </th>
+          <th>Từ trạng thái</th>
+          <th>Sang trạng thái</th>
+          <th>User</th>
+          <th>Ngày thực hiện</th>
+          <th>Ghi chú</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-row>
+        <tr [pSelectableRow]="row">
+          <td style="width: 10px">
+            <span class="ui-column-title"></span>
+            <p-tableCheckbox [value]="row"></p-tableCheckbox>
+          </td>
+          <td>
+            <p-badge *ngIf="row.fromStatus == 0" value="Nháp" severity="info"></p-badge>
+            <p-badge *ngIf="row.fromStatus == 1" value="Đợi duyệt" severity="warning"></p-badge>
+            <p-badge *ngIf="row.fromStatus == 2" value="Từ chối" severity="danger"></p-badge>
+            <p-badge *ngIf="row.fromStatus == 3" value="Đã đăng" severity="success"></p-badge>
+          </td>
+          <td>
+            <p-badge *ngIf="row.toStatus == 0" value="Nháp" severity="info"></p-badge>
+            <p-badge *ngIf="row.toStatus == 1" value="Đợi duyệt" severity="warning"></p-badge>
+            <p-badge *ngIf="row.toStatus == 2" value="Từ chối" severity="danger"></p-badge>
+            <p-badge *ngIf="row.toStatus == 3" value="Đã đăng" severity="success"></p-badge>
+          </td>
+          <td>{{ row.userName }}</td>
+          <td>{{ row.dateCreated | date : 'dd-MM-yyyy hh:mm' }}</td>
+          <td>{{ row.note }}</td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="summary">
+      </ng-template>
+    </p-table>
+  </div>
+
+  <p-blockUI [target]="pnlDetail" [blocked]="blockedPanelDetail">
+    <p-progressSpinner [style]="{ width: '100px', height: '100px', position: 'absolute', top: '25%', left: '50%' }"
+      strokeWidth="2" animationDuration=".5s"></p-progressSpinner>
+  </p-blockUI>
+</p-panel>

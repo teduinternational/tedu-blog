@@ -1,0 +1,83 @@
+<div class="animated fadeIn">
+    <p-panel #pnl [style]="{'margin-bottom':'10px'}">
+      <p-header>
+        Lịch sử giao dịch
+      </p-header>
+      <div class="row">
+        <div class="col">
+          <div class="row">
+            <div class="col-3">
+              <input id="txtUserName" pInputText (keyup.enter)="loadData()" pInputText [(ngModel)]="userName"
+                placeholder="Nhập tài khoản..." type="text">
+            </div>
+            <div class="col-7">
+              <div class="row">
+                <div class="col-3">
+                  <p-inputNumber id="fromMonth" [(ngModel)]="fromMonth" class="number">
+                  </p-inputNumber>
+                </div>
+                <div class="col-3">
+                  <p-inputNumber id="fromYear" [(ngModel)]="fromYear" class="number">
+                  </p-inputNumber>
+                </div>
+                <div class="col-3">
+                  <p-inputNumber id="toMonth" [(ngModel)]="toMonth" class="number">
+                  </p-inputNumber>
+                </div>
+                <div class="col-3">
+                  <p-inputNumber id="toYear" [(ngModel)]="toYear" class="number">
+                  </p-inputNumber>
+                </div>
+              </div>
+            </div>
+            <div class="col-2">
+              <button type="button" pButton (click)="loadData()">Tìm</button>
+            </div>
+          </div>
+  
+        </div>
+      </div>
+      <div class="row mt-3">
+        <p-table #dt [value]="items" selectionMode="multiple" dataKey="id" [metaKeySelection]="true" [responsive]="true">
+          <ng-template pTemplate="header">
+            <tr>
+              <th style="width: 10px">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+              </th>
+              <th>User</th>
+              <th>Số tiền</th>
+              <th>Ngày GD</th>
+              <th>Loại GD</th>
+              <th>Ghi chú</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-row>
+            <tr [pSelectableRow]="row">
+              <td style="width: 10px"><span class="ui-column-title"></span>
+                <p-tableCheckbox [value]="row"></p-tableCheckbox>
+              </td>
+              <td>{{row.toUserName}}</td>
+              <td>{{row.amount | number}}</td>
+              <td>{{row.dateCreated | date : 'dd-MM-yyyy hh:mm' }}</td>
+              <td>
+                <p-badge *ngIf="row.transactionType == 0" value="Trả nhuận bút" severity="info"></p-badge>
+              </td>
+              <td>{{row.note}}</td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="summary">
+            <div style="text-align: left">
+              Tổng số: {{totalCount | number}}
+            </div>
+          </ng-template>
+        </p-table>
+      </div>
+      <p-paginator [rows]="pageSize" [totalRecords]="totalCount" (onPageChange)="pageChanged($event)"
+        [rowsPerPageOptions]="[10, 20, 50, 100]"></p-paginator>
+  
+      <p-blockUI [target]="pnl" [blocked]="blockedPanel">
+        <p-progressSpinner [style]="{width: '100px', height: '100px', position:'absolute',top:'25%',left:'50%'}"
+          strokeWidth="2" animationDuration=".5s"></p-progressSpinner>
+      </p-blockUI>
+    </p-panel>
+  </div>

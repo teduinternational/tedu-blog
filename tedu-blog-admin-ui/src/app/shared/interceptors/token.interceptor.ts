@@ -19,6 +19,8 @@ import {
   TokenRequest,
 } from '../../api/admin-api.service.generated';
 import { Router } from '@angular/router';
+import { AlertService } from 'src/app/shared/services/alert.service';
+import { BroadcastService } from 'src/app/shared/services/boardcast.service';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -29,7 +31,9 @@ export class TokenInterceptor implements HttpInterceptor {
   constructor(
     private router: Router,
     private tokenService: TokenStorageService,
-    private tokenApiClient: AdminApiTokenApiClient) { }
+    private tokenApiClient: AdminApiTokenApiClient,
+    private alertService: AlertService,
+    private boardCastService: BroadcastService) { }
 
   addAuthHeader(request) {
     const authHeader = this.tokenService.getToken();
@@ -79,10 +83,12 @@ export class TokenInterceptor implements HttpInterceptor {
     this.router.navigate(["login"]);
   }
 
-  handleResponseError(error, request?, next?) {
+  async handleResponseError(error, request?, next?) {
     // Business error
     if (error.status === 400) {
-      // Show message
+      const errMessage = await (new Response(error.error)).text();
+      this.alertService.showError(errMessage);
+      this.boardCastService.httpError.next(true);
     }
 
     // Invalid token error
@@ -103,20 +109,15 @@ export class TokenInterceptor implements HttpInterceptor {
 
     // Access denied error
     else if (error.status === 403) {
-      // Show message
       // Logout
       this.logout();
-    }
+      this.boardCastService.httpError.next(true);
 
-    // Server error
-    else if (error.status === 500) {
-      // Show message
     }
-
     // Maintenance error
-    else if (error.status === 503) {
-      // Show message
-      // Redirect to the maintenance page
+    else if (error.status === 500) {
+      this.alertService.showError('Hệ thống có lỗi xảy ra. Vui lòng liên hệ admin');
+      this.boardCastService.httpError.next(true);
     }
 
     return throwError(error);

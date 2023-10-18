@@ -42,7 +42,7 @@ export class TokenStorageService {
   }
 
   public getUser(): UserModel | null {
-    const token = window.localStorage.getItem(USER_KEY);
+    const token = window.localStorage.getItem(TOKEN_KEY);
     if (!token)
       return null;
     const base64Url = token.split('.')[1];

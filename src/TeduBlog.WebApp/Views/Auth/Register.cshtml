@@ -1,0 +1,67 @@
+﻿@{
+    ViewData["Title"] = "Register";
+    ViewData["Description"] = "Register new member";
+
+}
+@model RegsiterViewModel
+<!-- Page Header-->
+<header class="masthead" style="background-image: url('/assets/img/home-bg.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Regsiter new member</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Main Content-->
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            <form asp-action="Register" asp-controller="Auth" method="post" class="row g-12">
+                <div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
+
+                <div class="col-md-6">
+                    <label for="firstName" class="form-label">First name</label>
+                    <input type="text" class="form-control" asp-for="FirstName" id="firstName" required>
+                    <span asp-validation-for="FirstName" class="invalid-feedback"></span>
+                </div>
+                <div class="col-md-6">
+                    <label for="lastName" class="form-label">Last name</label>
+                    <input type="text" class="form-control" asp-for="LastName" id="lastName" required>
+                    <span asp-validation-for="LastName" class="invalid-feedback"></span>
+
+                </div>
+                <div class="col-md-12">
+                    <label for="email" asp-for="Email" class="form-label">Email</label>
+                    <div class="input-group has-validation">
+                        <span class="input-group-text" id="inputGroupPrepend3">@@</span>
+                        <input type="text" class="form-control" id="email" asp-for="Email" required>
+                        <span asp-validation-for="Email" class="invalid-feedback"></span>
+
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" asp-for="Password" class="form-control" id="password" required>
+                    <span asp-validation-for="Password" class="invalid-feedback"></span>
+
+                </div>
+                <div class="col-12">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="agree" required>
+                        <label class="form-check-label" for="agree">
+                            Agree to <a href="">terms and conditions</a>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -6,5 +6,7 @@ namespace TeduBlog.WebApp.Models
     {
         public PostDto Post { get; set; }
         public PostCategoryDto Category { get; set; }
+
+        public List<TagDto> Tags { get; set; }
     }
 }

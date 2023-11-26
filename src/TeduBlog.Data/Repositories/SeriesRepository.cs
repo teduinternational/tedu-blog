@@ -1,16 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TeduBlog.Core.Domain.Content;
 using TeduBlog.Core.Models.Content;
 using TeduBlog.Core.Models;
 using TeduBlog.Core.Repositories;
 using TeduBlog.Data.SeedWorks;
-using static TeduBlog.Core.SeedWorks.Constants.Permissions;
 
 namespace TeduBlog.Data.Repositories
 {
@@ -67,6 +61,36 @@ namespace TeduBlog.Data.Repositories
                         where pis.SeriesId == seriesId
                         select p;
             return await _mapper.ProjectTo<PostInListDto>(query).ToListAsync();
+        }
+
+        public async Task<PagedResult<PostInListDto>> GetAllPostsInSeries(string slug, int pageIndex = 1, int pageSize = 10)
+        {
+            var query = from pis in _context.PostInSeries
+                        join p in _context.Posts
+                        on pis.PostId equals p.Id
+                        join s in _context.Series on pis.SeriesId equals s.Id
+                        where s.Slug == slug
+                        select p;
+            var totalRow = await query.CountAsync();
+
+            query = query.OrderByDescending(x => x.DateCreated)
+               .Skip((pageIndex - 1) * pageSize)
+               .Take(pageSize);
+
+            return new PagedResult<PostInListDto>
+            {
+                Results = await _mapper.ProjectTo<PostInListDto>(query).ToListAsync(),
+                CurrentPage = pageIndex,
+                RowCount = totalRow,
+                PageSize = pageSize
+            };
+        }
+
+        public async Task<SeriesDto> GetBySlug(string slug)
+        {
+            var series = await _context.Series.FirstOrDefaultAsync(x => x.Slug == slug);
+            return _mapper.Map<SeriesDto>(series);
+
         }
 
         public async Task<bool> HasPost(Guid seriesId)

@@ -20,5 +20,6 @@ namespace TeduBlog.Core.Repositories
 
         Task<List<PostInListDto>> GetLatestPublishPost(int top);
 
+        Task<PagedResult<PostInListDto>> GetPostByCategoryPaging(string categorySlug, int pageIndex = 1, int pageSize = 10);
     }
 }

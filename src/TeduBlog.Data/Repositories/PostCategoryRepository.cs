@@ -5,6 +5,7 @@ using TeduBlog.Core.Models.Content;
 using TeduBlog.Core.Models;
 using TeduBlog.Core.Repositories;
 using TeduBlog.Data.SeedWorks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace TeduBlog.Data.Repositories
 {
@@ -36,6 +37,13 @@ namespace TeduBlog.Data.Repositories
                 RowCount = totalRow,
                 PageSize = pageSize
             };
+        }
+
+        public async Task<PostCategoryDto> GetBySlug(string slug)
+        {
+            var category = await _context.PostCategories.FirstOrDefaultAsync(x => x.Slug == slug);
+            if (category == null) { throw new Exception($"Cannot find {slug}"); }
+            return _mapper.Map<PostCategoryDto>(category);
         }
 
         public async Task<bool> HasPost(Guid categoryId)

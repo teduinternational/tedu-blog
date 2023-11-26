@@ -197,5 +197,14 @@ namespace TeduBlog.Data.Repositories
                        && x.Status == PostStatus.Published)
                .ToListAsync();
         }
+
+        public async Task<List<PostInListDto>> GetLatestPublishPost(int top)
+        {
+            var query = _context.Posts.Where(x=>x.Status == PostStatus.Published)
+                .Take(top)
+                .OrderByDescending(x => x.DateCreated);
+
+            return await _mapper.ProjectTo<PostInListDto>(query).ToListAsync();
+        }
     }
 }

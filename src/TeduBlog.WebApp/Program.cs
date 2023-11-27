@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TeduBlog.Core.ConfigOptions;
 using TeduBlog.Core.Domain.Identity;
+using TeduBlog.Core.Events.LoginSuccessed;
 using TeduBlog.Core.Models.Content;
 using TeduBlog.Core.SeedWorks;
 using TeduBlog.Data;
@@ -59,6 +60,7 @@ builder.Services.AddScoped<IUserClaimsPrincipalFactory<AppUser>,
 #endregion
 
 builder.Services.AddAutoMapper(typeof(PostInListDto));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(LoginSuccessedEvent).Assembly));
 
 #region Configure Services
 // Add services to the container.

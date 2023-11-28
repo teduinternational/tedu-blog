@@ -22,7 +22,10 @@
         <div class="col-md-10 col-lg-8 col-xl-7">
             <form asp-action="Login" asp-controller="Auth" method="post" class="row g-12">
                 <div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
-
+                @if (TempData[SystemConsts.FormSuccessMsg] != null)
+                {
+                    <div class="alert alert-success">@TempData[SystemConsts.FormSuccessMsg]</div>
+                }
                 <div class="col-md-12">
                     <label for="email" asp-for="Email" class="form-label">Email</label>
                     <div class="input-group has-validation">
@@ -39,14 +42,9 @@
                     <span asp-validation-for="Password" class="invalid-feedback"></span>
 
                 </div>
-@*                 <div class="col-12">
-                    <div class="form-check">
-                        <input class="form-check-input" asp-for="RememberMe" type="checkbox" id="agree">
-                        <label class="form-check-label" for="agree">
-                            Remember me?
-                        </label>
-                    </div>
-                </div> *@
+                 <div class="col-12">
+                    <a href="@UrlConsts.ForgotPassword">Forgot password?</a>
+                </div> 
                 <div class="col-12 mt-3">
                     <button class="btn btn-primary" type="submit">Submit</button>
                 </div>

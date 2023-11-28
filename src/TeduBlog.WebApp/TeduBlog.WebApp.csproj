@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Handlebars.Net" Version="2.1.4" />
+    <PackageReference Include="MailKit" Version="4.3.0" />
     <PackageReference Include="MediatR" Version="12.2.0" />
   </ItemGroup>
 

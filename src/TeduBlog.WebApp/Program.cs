@@ -9,6 +9,7 @@ using TeduBlog.Data;
 using TeduBlog.Data.Repositories;
 using TeduBlog.Data.SeedWorks;
 using TeduBlog.WebApp.Helpers;
+using TeduBlog.WebApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,7 @@ builder.Services.AddControllersWithViews();
 
 //Custom setup
 builder.Services.Configure<SystemConfig>(configuration.GetSection("SystemConfig"));
+builder.Services.Configure<EmailSettings>(configuration.GetSection("EmailSettings"));
 
 builder.Services.AddDbContext<TeduBlogContext>(options => options.UseSqlServer(connectionString));
 
@@ -66,6 +68,7 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Login
 // Add services to the container.
 builder.Services.AddScoped(typeof(IRepository<,>), typeof(RepositoryBase<,>));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IEmailSender, EmailSender>();
 // Business services and repositories
 var services = typeof(PostRepository).Assembly.GetTypes()
     .Where(x => x.GetInterfaces().Any(i => i.Name == typeof(IRepository<,>).Name)

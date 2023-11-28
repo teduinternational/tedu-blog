@@ -15,6 +15,8 @@
         public static string Author = "/author/{0}";
         public static string Series = "/series";
         public static string SeriesDetail = "/series/{0}";
+        public static string ChangeProfile = "/profile/edit";
+
 
         public static string ChangePassword = "/change-password";
 

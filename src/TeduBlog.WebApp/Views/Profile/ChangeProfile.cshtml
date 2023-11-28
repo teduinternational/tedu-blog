@@ -1,0 +1,47 @@
+﻿@{
+    ViewData["Title"] = "Edit profile";
+    ViewData["Description"] = "Edit profile";
+
+}
+@model ChangeProfileViewModel
+<!-- Page Header-->
+<header class="masthead" style="background-image: url('/assets/img/home-bg.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Edit profile</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Main Content-->
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            <form asp-action="ChangeProfile" asp-controller="Profile" method="post">
+                <div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
+                @if (TempData["Success"] != null)
+                {
+                    <div class="alert alert-success">@TempData["Success"]</div>
+                }
+                <div class="col-md-6">
+                    <label for="firstName" class="form-label">First name</label>
+                    <input type="text" class="form-control" asp-for="FirstName" id="firstName" required>
+                    <span asp-validation-for="FirstName" class="invalid-feedback"></span>
+                </div>
+                <div class="col-md-6">
+                    <label for="lastName" class="form-label">Last name</label>
+                    <input type="text" class="form-control" asp-for="LastName" id="lastName" required>
+                    <span asp-validation-for="LastName" class="invalid-feedback"></span>
+
+                </div>
+
+                <div class="col-12 mt-3">
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

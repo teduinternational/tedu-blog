@@ -1,5 +1,10 @@
-﻿@inject IOptions<SystemConfig> _config;
+﻿@using Microsoft.AspNetCore.Identity
+@using TeduBlog.Core.Domain.Identity
+@using TeduBlog.WebApp.Extensions
+@inject IOptions<SystemConfig> _config;
 @model List<NavigationItemViewModel>
+@inject SignInManager<AppUser> SignInManager
+
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
     <div class="container px-4 px-lg-5">
@@ -30,8 +35,16 @@
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
             <span class="navbar-text">
-                <a class="btn" href="@UrlConsts.Login">Login</a>
-                <a class="btn" href="@UrlConsts.Register">Register</a>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <a class="btn" href="@UrlConsts.Profile">@User.GetFirstName()</a>
+                }
+                else
+                {
+                    <a class="btn" href="@UrlConsts.Login">Login</a>
+                    <a class="btn" href="@UrlConsts.Register">Register</a>
+                }
+
             </span>
         </div>
     </div>

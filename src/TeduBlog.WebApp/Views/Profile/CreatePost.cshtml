@@ -1,0 +1,84 @@
+﻿@{
+    ViewData["Title"] = "Create new post";
+    ViewData["Description"] = "Create new post";
+
+}
+@section Scripts{
+    <script src="https://cdn.tiny.cloud/1/mejj7k0mgbwlpkvtikdwlo65p70cdyoxm0gnpxuz8irgq68t/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea#txtContent',
+            plugins: 'ai tinycomments mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+            mergetags_list: [
+                { value: 'First.Name', title: 'First Name' },
+                { value: 'Email', title: 'Email' },
+            ],
+            ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+        });
+    </script>
+}
+@model CreatePostViewModel
+<!-- Page Header-->
+<header class="masthead" style="background-image: url('/assets/img/home-bg.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Create new post</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Main Content-->
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            <form asp-action="CreatePost" asp-controller="Profile" method="post" enctype="multipart/form-data">
+                <div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
+                @if (TempData[SystemConsts.FormSuccessMsg] != null)
+                {
+                    <div class="alert alert-success">@TempData[SystemConsts.FormSuccessMsg]</div>
+                }
+                <div class="col-md-12">
+                    <label for="firstName" class="form-label">Title</label>
+                    <input type="text" class="form-control" asp-for="Title" id="Title" required>
+                    <span asp-validation-for="Title" class="invalid-feedback"></span>
+                </div>
+                <div class="col-md-12">
+                    <label for="firstName" class="form-label">Description</label>
+                    <input type="text" class="form-control" asp-for="Description" id="Description" required>
+                    <span asp-validation-for="Description" class="invalid-feedback"></span>
+                </div>
+                <div class="col-md-12">
+                    <label asp-for="CategoryId" class="form-label">Category</label>
+                    <select asp-for="CategoryId" class="form-control" asp-items="Model.Categories">
+                        <option>Please select category</option>
+                    </select>
+                    <span asp-validation-for="CategoryId" class="invalid-feedback"></span>
+
+                </div>
+                <div class="col-md-12">
+                    <label for="lastName" class="form-label">Thumbnail</label>
+                    <input type="file" class="form-control" name="thumbnail" id="thumbnail" required>
+                    <input type="hidden" asp-for="ThumbnailImage" />
+                </div>
+                <div class="col-md-6">
+                    <label for="firstName" class="form-label">SEO Description</label>
+                    <textarea class="form-control" asp-for="SeoDescription" id="SeoDescription" rows="5"></textarea>
+                </div>
+                <div class="col-md-12">
+                    <label for="firstName" class="form-label">Content</label>
+                    <textarea class="form-control" asp-for="Content" id="txtContent"></textarea>
+                </div>
+                <div class="col-12 mt-3">
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                    <a href="@UrlConsts.PostListByUser">Back to list</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

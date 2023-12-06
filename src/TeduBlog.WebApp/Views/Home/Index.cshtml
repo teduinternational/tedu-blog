@@ -1,8 +1,46 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
-}
+    ViewData["Description"] = "Home page";
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+}
+@inject IOptions<SystemConfig> _config;
+@model HomeViewModel
+<!-- Page Header-->
+<header class="masthead" style="background-image: url('/assets/img/home-bg.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>@_config.Value.AppName</h1>
+                    <span class="subheading">@_config.Value.AppSlogan</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Main Content-->
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            @foreach (var item in Model.LatestPosts)
+            {
+                <!-- Post preview-->
+                <div class="post-preview">
+                    <a href="@string.Format(UrlConsts.PostDetails,item.Slug)" title="@item.Name">
+                        <h2 class="post-title">@item.Name</h2>
+                        <h3 class="post-subtitle">@item.Description</h3>
+                    </a>
+                    <p class="post-meta">
+                        Posted by
+                        <a href="@string.Format(UrlConsts.Author,item.AuthorUserName)">@item.AuthorName</a>
+                        on @item.DateCreated.ToLongTimeString()
+                    </p>
+                </div>
+                <!-- Divider-->
+                <hr class="my-4" />
+            }
+            <!-- Pager-->
+            <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="@UrlConsts.Posts">Older Posts →</a></div>
+        </div>
+    </div>
 </div>

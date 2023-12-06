@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Login";
+    ViewData["Description"] = "Login";
+
+}
+@model LoginViewModel
+<!-- Page Header-->
+<header class="masthead" style="background-image: url('/assets/img/home-bg.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Login</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Main Content-->
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            <form asp-action="Login" asp-controller="Auth" method="post" class="row g-12">
+                <div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
+                @if (TempData[SystemConsts.FormSuccessMsg] != null)
+                {
+                    <div class="alert alert-success">@TempData[SystemConsts.FormSuccessMsg]</div>
+                }
+                <div class="col-md-12">
+                    <label for="email" asp-for="Email" class="form-label">Email</label>
+                    <div class="input-group has-validation">
+                        <span class="input-group-text" id="inputGroupPrepend3">@@</span>
+                        <input type="text" class="form-control" id="email" asp-for="Email" required>
+                        <span asp-validation-for="Email" class="invalid-feedback"></span>
+
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" asp-for="Password" class="form-control" id="password" required>
+                    <span asp-validation-for="Password" class="invalid-feedback"></span>
+
+                </div>
+                 <div class="col-12">
+                    <a href="@UrlConsts.ForgotPassword">Forgot password?</a>
+                </div> 
+                <div class="col-12 mt-3">
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

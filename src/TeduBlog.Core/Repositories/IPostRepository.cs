@@ -33,6 +33,7 @@ namespace TeduBlog.Core.Repositories
         Task<List<TagDto>> GetTagObjectsByPostId(Guid postId);
 
         Task<PagedResult<PostInListDto>> GetPostByTagPaging(string tagSlug, int pageIndex = 1, int pageSize = 10);
+        Task<PagedResult<PostInListDto>> GetPostByUserPaging(string keyword,Guid userId, int pageIndex = 1, int pageSize = 10);
 
 
     }

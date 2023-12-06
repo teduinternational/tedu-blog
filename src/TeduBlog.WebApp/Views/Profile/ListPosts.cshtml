@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Profile " + Model.FirstName;
+    ViewData["Description"] = "Profile";
+
+}
+@model ProfileViewModel
+<!-- Page Header-->
+<header class="masthead" style="background-image: url('/assets/img/home-bg.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>@Model.FirstName</h1>
+                    <span class="subheading">@Model.Email</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Main Content-->
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            @if (TempData[SystemConsts.FormSuccessMsg] != null)
+            {
+                <div class="alert alert-success">
+                    @TempData[SystemConsts.FormSuccessMsg]
+                </div>
+            }
+            <table class="table table-borderless">
+                <thead>
+                    <tr>
+                        <td>Name</td>
+                        <td>@Model.FullName</td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>@Model.Email</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a class="btn btn-primary" href="@UrlConsts.ChangeProfile">Update profile</a>
+                            <a class="btn btn-primary" href="@UrlConsts.ChangePassword">Change password</a>
+
+                        </td>
+                        <td>
+                            <form id="logoutForm" class="form-inline" asp-controller="Profile" asp-action="Logout">
+                                <button class="btn btn-danger" type="submit">Sign Out</button>
+                            </form>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+
+        </div>
+    </div>
+</div>

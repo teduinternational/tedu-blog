@@ -396,4 +396,4 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
-/src/TeduBlog.Api/wwwroot/media/images/posts/122023
+/src/TeduBlog.Api/wwwroot/media/**

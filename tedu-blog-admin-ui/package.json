@@ -12,7 +12,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build-prod": "ng build --c production",
+    "build-uat":"ng build --c uat",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "nswag-admin": "node node_modules/nswag/bin/nswag.js run nswag-admin.json"

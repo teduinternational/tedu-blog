@@ -22,6 +22,10 @@ using TeduBlog.Data.SeedWorks;
 using TeduBlog.Data.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                      .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true);
+
 var configuration = builder.Configuration;
 var connectionString = configuration.GetConnectionString("DefaultConnection");
 var TeduCorsPolicy = "TeduCorsPolicy";
@@ -32,7 +36,7 @@ builder.Services.AddCors(o => o.AddPolicy(TeduCorsPolicy, builder =>
 {
     builder.AllowAnyMethod()
         .AllowAnyHeader()
-        .WithOrigins(configuration["AllowedOrigins"])
+        .WithOrigins(configuration["AllowedOrigins"]?.Split(";"))
         .AllowCredentials();
 }));
 //Config DB Context and ASP.NET Core Identity

@@ -1,7 +1,7 @@
-﻿@model PostListByTagViewModel
+﻿@model SearchViewModel
 @{
-    ViewData["Title"] = Model.Tag.Name + (Model.Posts.CurrentPage > 1 ? $" - Page {Model.Posts.CurrentPage}" : "");
-    ViewData["Description"] = "Post by tag: " + Model.Tag.Name + (Model.Posts.CurrentPage > 1 ? $" - Page {Model.Posts.CurrentPage}" : "");
+    ViewData["Title"] = "All posts  by keyword" + Model.Keyword + (Model.Posts.CurrentPage > 1 ? $" - Page {Model.Posts.CurrentPage}" : "");
+    ViewData["Description"] = "All posts  by keyword" + Model.Keyword + (Model.Posts.CurrentPage > 1 ? $" - Page {Model.Posts.CurrentPage}" : "");
 }
 <!-- Page Header-->
 <header class="masthead" style="background-image: url('/assets/img/home-bg.jpg')">
@@ -9,7 +9,7 @@
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="site-heading">
-                    <h1>Tag: @Model.Tag.Name</h1>
+                    <h1>Keyword: @Model.Keyword</h1>
                 </div>
             </div>
         </div>

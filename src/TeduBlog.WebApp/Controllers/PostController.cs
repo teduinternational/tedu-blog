@@ -13,17 +13,33 @@ namespace TeduBlog.WebApp.Controllers
         }
 
         [Route("posts")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
-            return View();
+            var viewModel = new PostViewModel()
+            {
+                Posts = await _unitOfWork.Posts.GetLatestPostsPaging(page, 10)
+            };
+            return View(viewModel);
+        }
+
+        [Route("search")]
+        public async Task<IActionResult> Search(string keyword, int page = 1)
+        {
+            var viewModel = new SearchViewModel()
+            {
+                Keyword = keyword,
+                Posts = await _unitOfWork.Posts.SearchLatestPostsPaging(keyword, page, 10)
+            };
+            return View(viewModel);
         }
 
         [Route("posts/{categorySlug}")]
         public async Task<IActionResult> ListByCategory([FromRoute] string categorySlug, [FromQuery] int page = 1)
         {
-            var posts = await _unitOfWork.Posts.GetPostByCategoryPaging(categorySlug, page, 2);
+            var posts = await _unitOfWork.Posts.GetPostByCategoryPaging(categorySlug, page, 10);
             var category = await _unitOfWork.PostCategories.GetBySlug(categorySlug);
-            return View(new PostListByCategoryViewModel(){
+            return View(new PostListByCategoryViewModel()
+            {
                 Posts = posts,
                 Category = category
             });
@@ -32,7 +48,7 @@ namespace TeduBlog.WebApp.Controllers
         [Route("tag/{tagSlug}")]
         public async Task<IActionResult> ListByTag([FromRoute] string tagSlug, [FromQuery] int page = 1)
         {
-            var posts = await _unitOfWork.Posts.GetPostByTagPaging(tagSlug, page, 2);
+            var posts = await _unitOfWork.Posts.GetPostByTagPaging(tagSlug, page, 10);
             var tag = await _unitOfWork.Tags.GetBySlug(tagSlug);
             return View(new PostListByTagViewModel()
             {

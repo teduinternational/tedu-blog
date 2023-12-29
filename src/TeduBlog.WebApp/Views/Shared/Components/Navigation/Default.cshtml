@@ -19,7 +19,7 @@
                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="@UrlConsts.Series">Series</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle px-lg-3 py-3 py-lg-4" href="@UrlConsts.Posts" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Posts
+                        Blogs
                     </a>
                     <ul class="dropdown-menu">
                         @foreach (var item in Model)
@@ -30,23 +30,10 @@
                 </li>
                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="@UrlConsts.Contact">Contact</a></li>
             </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <form class="d-flex" role="search" asp-action="Search" asp-controller="Post" method="get">
+                <input class="form-control me-2" type="search" name="keyword" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
-            <span class="navbar-text">
-                @if (SignInManager.IsSignedIn(User))
-                {
-                    <a class="btn" href="@UrlConsts.Profile">@User.GetFirstName()</a>
-                    <a class="btn" href="@UrlConsts.CreatePost">Create Posts</a>
-                }
-                else
-                {
-                    <a class="btn" href="@UrlConsts.Login">Login</a>
-                    <a class="btn" href="@UrlConsts.Register">Register</a>
-                }
-
-            </span>
         </div>
     </div>
 </nav>

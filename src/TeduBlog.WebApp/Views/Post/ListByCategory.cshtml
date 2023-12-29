@@ -1,7 +1,7 @@
 ﻿@model PostListByCategoryViewModel
 @{
-    ViewData["Title"] = Model.Category.Name + (Model.Posts.CurrentPage > 1 ? $" - Trang {Model.Posts.CurrentPage}" : "");
-    ViewData["Description"] = Model.Category.SeoDescription + (Model.Posts.CurrentPage > 1 ? $" - Trang {Model.Posts.CurrentPage}" : "");
+    ViewData["Title"] = Model.Category.Name + (Model.Posts.CurrentPage > 1 ? $" - Page {Model.Posts.CurrentPage}" : "");
+    ViewData["Description"] = Model.Category.SeoDescription + (Model.Posts.CurrentPage > 1 ? $" - Page {Model.Posts.CurrentPage}" : "");
 }
 <!-- Page Header-->
 <header class="masthead" style="background-image: url('/assets/img/home-bg.jpg')">
